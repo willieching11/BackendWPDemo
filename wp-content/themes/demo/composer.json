@@ -1,0 +1,22 @@
+
+{
+  "name": "epicpress",
+  "description": "This is a starter theme based of Automattic's _s built by Willie Ching",
+  "type": "wordpress-theme",
+  "minimum-stability" : "dev",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "Willie Ching",
+          "email": "willieching11@gmail.com"
+      }
+  ],
+  "require": {
+      "composer/installers": "~1.0"
+  },
+  "require-dev": {
+      "squizlabs/php_codesniffer": "*",
+      "wimg/php-compatibility": "*",
+      "dealerdirect/phpcodesniffer-composer-installer": "^0.4.4"
+  }
+}

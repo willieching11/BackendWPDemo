@@ -1,0 +1,35 @@
+body, html{
+    //overflow-x: hidden;
+}
+.grecaptcha-badge { visibility: hidden; }
+.row .row{ width: 100%; }
+
+.container{
+    padding: 0 map-get($grid-container-padding, "sm");
+    @include media-breakpoint-up(md) {
+        padding: 0 map-get($grid-container-padding, "md");
+    }
+    @include media-breakpoint-up(lg) {
+        padding: 0 map-get($grid-container-padding, "lg");
+    }
+}
+.relative{
+    position: relative;
+}
+img{
+    object-fit: cover;
+    width: 100%;
+}
+video{
+    width: 100%;
+}
+.background-black{
+    background-color: $black;
+}
+.background-grey{
+    background-color: grey;
+}
+.background-image{
+    background-size: cover;
+    background-position: center;
+}

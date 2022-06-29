@@ -1,0 +1,20 @@
+@import "settings";  
+@import "bootstrap-components";
+@import "font-awesome";
+
+
+// Global
+@import "global/mixins"; 
+@import "global/global"; 
+@import "global/accessibility"; 
+
+//Modules
+@import "modules/footer"; 
+@import "modules/header"; 
+
+//Templates
+@import "templates/single"; 
+
+//Components
+@import "components/flexible-content"; 
+@import "components/customization-block"; 

@@ -1,0 +1,20 @@
+@include media-breakpoint-only(sm) {
+    .order-sm-only-1{
+        order: 1;
+    }
+    .order-sm-only-2{
+        order: 2;
+    }
+}
+
+.customization-block{
+    .video-placeholder{
+        svg{
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }   
+
+}
+
