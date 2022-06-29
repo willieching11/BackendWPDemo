@@ -25,7 +25,7 @@ get_header();
 			<small>/index.php</small>
 		</div>
 	</div>
-	<div class="row mb-100">
+	<div class="row mb-40">
 		<div class="col-12">
 			<h4 class="font-weight-bold">Grid</h4>
 		</div>
@@ -34,94 +34,64 @@ get_header();
 		<div class="col-12 col-md-3 bg-warning text-white p-10">.col-12 .col-md-3</div>
 		<div class="col-12 col-md-3 bg-danger text-white p-10">.col-12 .col-md-3</div>
 	</div>
-	
-	<div class="row mb-100">
-		<div class="col-12"><h4 class="font-weight-bold">Text</h4></div>
-
-		<div class="col-12 col-md-6">
-			<h1>H1 heading</h1>
-		</div>
-		<div class="col-12 col-md-6">
-			<h3>H3 Heading</h3>
-		</div>			
-		<div class="col-12 col-md-6">
-			<h2>H2 Heading</h2>
-		</div>
-		<div class="col-12 col-md-6">
-			<h4>H4 Heading</h4>
-		</div>			
-		<div class="col-12 col-md-6">
-			<div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas obcaecati quisquam doloremque eveniet ipsum, suscipit quasi, sunt adipisci laborum placeat et! Optio accusamus consectetur placeat minus maxime, quas recusandae ipsam!</div>
-
-			<div>
-				<a href="#">Link</a>
-				<a href="#" class="btn btn-primary">Button</a>
-			</div>
-		</div>
-		<div class="col-12 col-md-6">
-			<small>small text</small>
-		</div>		
-	</div>
-	
-	<div class="row mb-100">
-	    <div class="col-12" id="accordions">
-	        <h4 class="font-weight-bold">Accordions</h4>
-	        <div id="accordion" role="tablist" aria-multiselectable="true">
-	            <div class="card">
-	                <div class="card-header" role="tab" id="headingOne">
-	                    <h5 class="mb-0">
-	                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Accordion One</a>
-	                    </h5>
-	                </div>
-	                <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
-	                    Example Text 1
-	                </div>
-	            </div>
-
-	            <div class="card">
-	                <div class="card-header" role="tab" id="headingtwo">
-	                    <h5 class="mb-0">
-	                        <a data-toggle="collapse" data-parent="#accordion" href="#collapsetwo" aria-expanded="false" aria-controls="collapsetwo">Accordion Two</a>
-	                    </h5>
-	                </div>
-	                <div id="collapsetwo" class="collapse" role="tabpanel" aria-labelledby="headingtwo">
-	                    Example Text 2
-	                </div>
-	            </div>
-
-
-	        </div>
-	    </div>
-	</div>
-	
-	<!-- Modal -->
+	<?php if ( function_exists( 'add_wistia_video' ) ): add_wistia_video(); ?>
+		<script>
+			is_logged_in = false;
+		window._wq = window._wq || [];
+		_wq.push({ id: "sajsbs1vl5", onReady: function(video) {
+			var video = Wistia.api("sajsbs1vl5");
+			video.bind("secondchange", function(s) {
+				if (s >= 5 && !is_logged_in) {
+					// If user is not logged in open popup
+					video.pause();
+					console.log("We just reached " + s + " seconds!");
+					$("#loginModal").modal('show');
+				}
+			});
+			video.bind('play', function() {
+				console.log(video.time());
+				if (video.time() >= 60 && !is_logged_in) {
+					// If user is not logged in open popup
+					video.pause();
+					$("#loginModal").modal('show');
+				}
+			});
+			video.play();
+		}});
+		</script>
 	<div class="row mb-100">
 		<div class="col-12">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
 			    Open Modal
 			</button>
-			<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 				    <div class="modal-content">
 				        <div class="modal-header">
-				            <h5 class="modal-title">Modal title</h5>
+				            <h5 class="modal-title">Please login to continue watching</h5>
 				            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				                <span aria-hidden="true">&times;</span>
 				            </button>
 				        </div>
 				        <div class="modal-body">
-				            <p>Modal body text goes here.</p>
-				        </div>
-				        <div class="modal-footer">
-				            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				            <button type="button" class="btn btn-primary">Save changes</button>
+							<form id="login" action="login" method="post">
+								<h1>Login</h1>
+								<p class="status"></p>
+								<label for="username">Username</label>
+								<input id="username" type="text" name="username">
+								<label for="password">Password</label>
+								<input id="password" type="password" name="password">
+								<input class="btn btn-primary" type="submit" value="Login" name="submit">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<?php wp_nonce_field( 'ajax-login-nonce', 'security' ); ?>
+							</form>
 				        </div>
 				    </div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<?php endif; ?>
 </div>
 
 <?php
