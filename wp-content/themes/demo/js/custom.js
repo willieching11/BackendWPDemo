@@ -48,7 +48,6 @@ $(document).ready(function() {
                 }
             });
             video.bind('play', function() {
-                console.log(video.time());
                 if (video.time() >= 60 && !is_logged_in) {
                     // If user is not logged in open popup
                     video.pause();
@@ -89,8 +88,10 @@ $(document).ready(function() {
                         $('form#login p.status').text(data.message);
                         if (data.loggedin == true){
                             is_logged_in = true;
-                            $("#loginModal").modal('close');
-                            video.play();
+                            setTimeout(function() {
+                                $("#loginModal").modal('hide');
+                                video.play();
+                            }, 1000);
                         }
                     },
                     error : function(error){ console.log(error) }

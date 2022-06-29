@@ -34,6 +34,10 @@ video{
     background-position: center;
 }
 
+.wistia_embed {
+    margin: auto;
+}
+
 form#login {
     input:not(.btn) {
         display: block;

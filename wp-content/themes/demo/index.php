@@ -37,9 +37,6 @@ get_header();
 	<?php if ( function_exists( 'add_wistia_video' ) ): add_wistia_video(); ?>
 	<div class="row mb-100">
 		<div class="col-12">
-			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
-			    Open Modal
-			</button>
 			<div class="modal" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 				    <div class="modal-content">
