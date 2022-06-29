@@ -1,7 +1,6 @@
 .DS_Store
 wp-content/themes/demo/node_modules/
 wp-content/themes/demo/npm-debug.log
-wp-content/themes/demo/dist
 *.sass-cache*
 *.log
 .idea/

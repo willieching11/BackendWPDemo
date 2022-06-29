@@ -36,6 +36,8 @@ function epicpress_scripts() {
 		'theme_url' => get_template_directory_uri(),
 		'post_name' => $post_name,
 		'ajax_url' => admin_url("admin-ajax.php"),
+		'redirecturl' => home_url(),
+        'loadingmessage' => __('Sending user info, please wait...'),
 		'bp_md'	=> BP_MEDIUM,
 		'bp_lg'	=> BP_LARGE,
 	));

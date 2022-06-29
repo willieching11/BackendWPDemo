@@ -35,19 +35,68 @@ $(document).ready(function() {
     function isBreakpoint(alias) {
         return $('.device-' + alias).is(':visible');
     }
-    if(window.msCrypto && $('#unsupported-browser').length > 0) {	//if IE11 only
-        $('#unsupported-browser').modal('show');
-	}
-
-    
-    //Lazy Load Video
-    $('.video-wrapper .video-placeholder').on('click', function(){
-          $(this).addClass('d-none');
-          var video = $(this).siblings('video');
-          var vidSrc = video.data('video_src')
-          video.children('source').attr('src', vidSrc);
-          video[0].load();
-          video.removeClass('d-none');
-          video.get(0).play();
-      })
+    if ($('.wistia_embed').length > 0) {
+        var is_logged_in = false;
+        window._wq = window._wq || [];
+        _wq.push({ id: "sajsbs1vl5", onReady: function(video) {
+            var video = Wistia.api("sajsbs1vl5");
+            video.bind("secondchange", function(s) {
+                if (s >= 60 && !is_logged_in) {
+                    // If user is not logged in open popup
+                    video.pause();
+                    $("#loginModal").modal('show');
+                }
+            });
+            video.bind('play', function() {
+                console.log(video.time());
+                if (video.time() >= 60 && !is_logged_in) {
+                    // If user is not logged in open popup
+                    video.pause();
+                    $("#loginModal").modal('show');
+                }
+            });
+            // Check to see if user is logged in initially
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: site.ajax_url,
+                data: { 
+                    'action': 'is_user_logged_in',
+                },
+                success: function(data){
+                    if (data.loggedin == true){
+                        is_logged_in = true;
+                    } else {
+                        is_logged_in = false;
+                    }
+                },
+                error : function(error){ console.log(error) }
+            });
+            // Perform AJAX login on form submit
+            $('form#login').on('submit', function(e){
+                $('form#login p.status').show().text(site.loadingmessage);
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'json',
+                    url: site.ajax_url,
+                    data: { 
+                        'action': 'ajax_login',
+                        'username': $('form#login #username').val(), 
+                        'password': $('form#login #password').val(), 
+                        'security': $('form#login #security').val() 
+                    },
+                    success: function(data){
+                        $('form#login p.status').text(data.message);
+                        if (data.loggedin == true){
+                            is_logged_in = true;
+                            $("#loginModal").modal('close');
+                            video.play();
+                        }
+                    },
+                    error : function(error){ console.log(error) }
+                });
+                e.preventDefault();
+            });
+        }});
+    }
 });

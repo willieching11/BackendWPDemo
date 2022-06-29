@@ -33,3 +33,13 @@ video{
     background-size: cover;
     background-position: center;
 }
+
+form#login {
+    input:not(.btn) {
+        display: block;
+        width: 100%;
+    }
+    .btn {
+        margin-top: 20px;
+    }
+}

@@ -35,30 +35,6 @@ get_header();
 		<div class="col-12 col-md-3 bg-danger text-white p-10">.col-12 .col-md-3</div>
 	</div>
 	<?php if ( function_exists( 'add_wistia_video' ) ): add_wistia_video(); ?>
-		<script>
-			is_logged_in = false;
-		window._wq = window._wq || [];
-		_wq.push({ id: "sajsbs1vl5", onReady: function(video) {
-			var video = Wistia.api("sajsbs1vl5");
-			video.bind("secondchange", function(s) {
-				if (s >= 5 && !is_logged_in) {
-					// If user is not logged in open popup
-					video.pause();
-					console.log("We just reached " + s + " seconds!");
-					$("#loginModal").modal('show');
-				}
-			});
-			video.bind('play', function() {
-				console.log(video.time());
-				if (video.time() >= 60 && !is_logged_in) {
-					// If user is not logged in open popup
-					video.pause();
-					$("#loginModal").modal('show');
-				}
-			});
-			video.play();
-		}});
-		</script>
 	<div class="row mb-100">
 		<div class="col-12">
 			<button type="button" class="btn btn-success" data-toggle="modal" data-target="#loginModal">
